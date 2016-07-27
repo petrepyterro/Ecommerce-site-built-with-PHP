@@ -113,3 +113,13 @@ EOD;
     echo $products;
   }
 }
+
+function get_category_name_in_category_page(){
+  $query = query("SELECT cat_title FROM categories WHERE id=" . escape_string($_GET['id']));
+  confirm($query);
+  
+  while($row = fetch_array($query)){
+    $cat_title = ucfirst($row['cat_title']);
+    echo $cat_title;
+  }
+}
