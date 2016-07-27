@@ -38,7 +38,7 @@ function get_products(){
   confirm($query);
   
   while($row = fetch_array($query)){
-    $product = <<<EOD
+    $products = <<<EOD
     <div class="col-sm-4 col-lg-4 col-md-4">
       <div class="thumbnail">
         <a href="item.php?id={$row['id']}"><img src="{$row['product_image']}" alt=""></a>
@@ -52,7 +52,7 @@ function get_products(){
       </div>
     </div>
 EOD;
-    echo $product;
+    echo $products;
   }
 }
 
@@ -65,5 +65,28 @@ function get_categories(){
       <a href='category.php?id={$row['id']}' class='list-group-item'>{$row['cat_title']}</a>
 DELIMETER;
     echo $categories_links;  
+  }
+}
+
+function get_products_by_category(){
+  $query = query("SELECT * FROM products WHERE product_category_id=" . escape_string($_GET['id']));
+  confirm($query);
+  
+  while($row = fetch_array($query)){
+    $products = <<<EOD
+    <div class="col-md-3 col-sm-6 hero-feature">
+      <div class="thumbnail">
+        <img src="{$row['product_image']}" alt="">
+        <div class="caption">
+          <h3>{$row['product_title']}</h3>
+          <p>Lorem Ipsum</p>
+          <p>
+            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['id']}" class="btn btn-default">More Info</a>
+          </p>
+        </div>
+      </div>
+    </div>
+EOD;
+    echo $products;
   }
 }
