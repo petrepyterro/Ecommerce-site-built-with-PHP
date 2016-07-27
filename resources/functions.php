@@ -90,3 +90,26 @@ EOD;
     echo $products;
   }
 }
+
+function get_products_in_shop_page(){
+  $query = query("SELECT * FROM products ");
+  confirm($query);
+  
+  while($row = fetch_array($query)){
+    $products = <<<EOD
+    <div class="col-md-3 col-sm-6 hero-feature">
+      <div class="thumbnail">
+        <img src="{$row['product_image']}" alt="">
+        <div class="caption">
+          <h3>{$row['product_title']}</h3>
+          <p>Lorem Ipsum</p>
+          <p>
+            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['id']}" class="btn btn-default">More Info</a>
+          </p>
+        </div>
+      </div>
+    </div>
+EOD;
+    echo $products;
+  }
+}
