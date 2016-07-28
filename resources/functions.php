@@ -30,6 +30,21 @@ function fetch_array($result){
   return mysqli_fetch_array($result);
 }
 
+function set_message($msg){
+  if(!empty($msg)){
+    $_SESSION['message'] = $msg;
+  } else {
+    $msg = "";
+  }
+}
+
+function display_message(){
+  if(isset($_SESSION['message'])){
+    echo $_SESSION['message'];
+    unset($_SESSION['message']);
+  }
+}
+
 /*********************FRONT END FUNCTIONS*****************/
 
 //get products
@@ -121,5 +136,23 @@ function get_category_name_in_category_page(){
   while($row = fetch_array($query)){
     $cat_title = ucfirst($row['cat_title']);
     echo $cat_title;
+  }
+}
+
+function login_user(){
+  if(isset($_POST['submit'])){
+    $username = escape_string($_POST['username']);
+    $password = escape_string($_POST['user_password']);
+    
+    $query = query("SELECT * FROM users WHERE username='$username' AND user_password='$password'");
+    confirm($query);
+    
+    if(mysqli_num_rows($query) == 0){
+      set_message("Your password or username are wrong");
+      redirect("login.php");
+    } else {
+      set_message("Welcome to Admin $username");
+      redirect("admin");
+    }
   }
 }
