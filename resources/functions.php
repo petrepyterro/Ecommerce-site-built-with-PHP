@@ -156,3 +156,9 @@ function login_user(){
     }
   }
 }
+
+function sent_message(){
+  if(isset($_POST['submit'])){
+    echo "it works";
+  }
+}
