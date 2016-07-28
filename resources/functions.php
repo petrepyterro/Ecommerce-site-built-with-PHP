@@ -159,6 +159,21 @@ function login_user(){
 
 function sent_message(){
   if(isset($_POST['submit'])){
-    echo "it works";
+    $to         = "someEmailAddress@gmail.com";
+    $from_name  = $_POST['name'];
+    $email      = $_POST['email'];
+    $subject    = $_POST['subject'];
+    $message    = $_POST['message'];
+    
+    $headers = "From: {$from_name} {$email}";
+    
+    $result = mail($to, $subject, $message, $headers);
+    
+    if(!$result){
+      set_message("Sorry we could not send your email");
+      redirect("contact.php");
+    } else {
+      sent_message("Your message has been sent");
+    }
   }
 }
