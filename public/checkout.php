@@ -1,7 +1,11 @@
 <?php require_once '../resources/config.php';?>
 <?php include TEMPLATE_FRONT . DS . 'header.php';?>
 
-
+<?php 
+  if(isset($_SESSION['product_2'])){
+    echo $_SESSION['product_2'];
+  }
+?>
   <!-- Page Content -->
   <div class="container">
     <!-- /.row --> 
@@ -25,6 +29,8 @@
               <td>$23</td>
               <td>3</td>
               <td>2</td>
+              <td><a href="cart.php?remove=2">Remove</a></td>
+              <td><a href="cart.php?delete=2">Delete</a></td>
             </tr>
           </tbody>
         </table>
