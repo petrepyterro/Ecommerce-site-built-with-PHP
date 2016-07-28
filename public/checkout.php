@@ -2,11 +2,6 @@
 <?php require_once 'cart.php'; ?>
 <?php include TEMPLATE_FRONT . DS . 'header.php';?>
 
-<?php 
-  if(isset($_SESSION['product_2'])){
-    echo $_SESSION['product_2'];
-  }
-?>
   <!-- Page Content -->
   <div class="container">
     <!-- /.row --> 

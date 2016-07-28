@@ -2,6 +2,7 @@
 <?php
   if(isset($_GET['add'])){
     
+    
     $query = query("SELECT * FROM products WHERE id=" . escape_string($_GET['add']));
     confirm($query);
     
@@ -35,22 +36,33 @@
   }
   
 function cart(){
-  
-  $query = query("SELECT * FROM products");
-  confirm($query);
-  
-  while($row = fetch_array($query)){
-    $product = <<<DELIMITER
-      <tr>
-        <td>apple</td>
-        <td>$23</td>
-        <td>3</td>
-        <td>2</td>
-        <td><a href="cart.php?remove=2">Remove</a></td>
-        <td><a href="cart.php?delete=2">Delete</a></td> 
-      </tr>  
+  foreach ($_SESSION as $name => $value){
+    if($value > 0){
+      if(substr($name, 0, 8) == "product_"){
+        $length = strlen($name - 8);
+        $id = substr($name, 8, $length);
+        $query = query("SELECT * FROM products WHERE id=" . escape_string($id));
+        confirm($query);
+
+        while($row = fetch_array($query)){
+        $product = <<<DELIMITER
+        <tr>
+          <td>apple</td>
+          <td>$23</td>
+          <td>3</td>
+          <td>2</td>
+          <td>
+            <a class='btn btn-warning' href="cart.php?remove={$row['id']}"><span class='glyphicon glyphicon-minus'></span></a>
+            <a class='btn btn-success' href="cart.php?add={$row['id']}"><span class='glyphicon glyphicon-plus'></span></a>
+            <a class='btn btn-danger' href="cart.php?delete={$row['id']}"><span class='glyphicon glyphicon-remove'></span></a>
+          </td> 
+        </tr>  
 DELIMITER;
-    echo $product;
+      echo $product;
+        }
+      }
+    }
   }
+  
 }
 ?>
