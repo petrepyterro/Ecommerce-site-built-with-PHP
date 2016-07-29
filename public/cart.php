@@ -45,22 +45,24 @@ function cart(){
         confirm($query);
 
         while($row = fetch_array($query)){
-        $product = <<<DELIMITER
-        <tr>
-          <td>apple</td>
-          <td>$23</td>
-          <td>3</td>
-          <td>2</td>
-          <td>
-            <a class='btn btn-warning' href="cart.php?remove={$row['id']}"><span class='glyphicon glyphicon-minus'></span></a>
-            <a class='btn btn-success' href="cart.php?add={$row['id']}"><span class='glyphicon glyphicon-plus'></span></a>
-            <a class='btn btn-danger' href="cart.php?delete={$row['id']}"><span class='glyphicon glyphicon-remove'></span></a>
-          </td> 
-        </tr>  
+          $sub = $row['product_price']*$value;
+          $product = <<<DELIMITER
+          <tr>
+            <td>{$row['product_title']}</td>
+            <td>&#36;{$row['product_price']}</td>
+            <td>{$value}</td>
+            <td>{$sub}</td>
+            <td>
+              <a class='btn btn-warning' href="cart.php?remove={$row['id']}"><span class='glyphicon glyphicon-minus'></span></a>
+              <a class='btn btn-success' href="cart.php?add={$row['id']}"><span class='glyphicon glyphicon-plus'></span></a>
+              <a class='btn btn-danger' href="cart.php?delete={$row['id']}"><span class='glyphicon glyphicon-remove'></span></a>
+            </td> 
+          </tr>  
 DELIMITER;
-      echo $product;
+          echo $product;
         }
       }
+      
     }
   }
   
