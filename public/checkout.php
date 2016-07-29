@@ -42,7 +42,8 @@
           </tr>
           <tr class="order-total">
           <th>Order Total</th>
-          <td><strong><span class="amount">$3444</span></strong> </td>
+          <td><strong><span class="amount">$
+            <?php echo isset($_SESSION['item_total']) ? $_SESSION['item_total'] : $_SESSION['item_total'] = 0; ?></span></strong> </td>
           </tr>
 
 

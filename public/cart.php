@@ -36,9 +36,12 @@
   }
   
 function cart(){
+  $total = 0;
+  $all_products_zero = true;
   foreach ($_SESSION as $name => $value){
     if($value > 0){
       if(substr($name, 0, 8) == "product_"){
+        $all_products_zero = false;
         $length = strlen($name - 8);
         $id = substr($name, 8, $length);
         $query = query("SELECT * FROM products WHERE id=" . escape_string($id));
@@ -60,10 +63,15 @@ function cart(){
           </tr>  
 DELIMITER;
           echo $product;
+          
         }
-      }
-      
-    }
+        $_SESSION['item_total'] = $total += $sub;
+      }  
+    } 
+  }
+  
+  if($all_products_zero){
+    $_SESSION['item_total']=0;
   }
   
 }
