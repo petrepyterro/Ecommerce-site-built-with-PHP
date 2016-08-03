@@ -69,10 +69,10 @@ function cart(){
               <a class='btn btn-danger' href="cart.php?delete={$row['id']}"><span class='glyphicon glyphicon-remove'></span></a>
             </td> 
           </tr>
-          <input type="hidden" name="item_name_{$item_name}" value="Memorex 256MB Memory Stick">
-          <input type="hidden" name="item_number_{$item_number}" value="MEM32507725">
-          <input type="hidden" name="amount_{$amount}" value="3">
-          <input type="hidden" name="quantity_{$quantity}" value="3">   
+          <input type="hidden" name="item_name_{$item_name}" value="{$row['product_title']}">
+          <input type="hidden" name="item_number_{$item_number}" value="{$row['id']}">
+          <input type="hidden" name="amount_{$amount}" value="{$row['product_price']}">
+          <input type="hidden" name="quantity_{$quantity}" value="{$value}">   
 DELIMITER;
           echo $product;
           $item_name++;
