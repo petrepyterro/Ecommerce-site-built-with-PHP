@@ -183,3 +183,25 @@ function last_id(){
   global $connection;
   return mysqli_insert_id($connection);
 }
+
+
+
+/*********************BACK END FUNCTIONS*****************/
+function display_orders(){
+  $query = query("SELECT * FROM orders");
+  confirm($query);
+  
+  while($row = fetch_array($query)){
+    $orders = <<<ORDERS
+      <tr>
+        <td>{$row['id']}</td>
+        <td>{$row['order_amount']}</td>
+        <td>{$row['order_transaction']}</td>
+        <td>{$row['order_currency']}</td>
+        <td>{$row['order_status']}</td>
+        
+      </tr>        
+ORDERS;
+    echo $orders;    
+  }
+}

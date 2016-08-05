@@ -99,7 +99,7 @@ BUTTON;
   }
 }
 
-function report(){
+function process_transaction(){
   if(isset($_GET['tx'])){
     $amount = $_GET['amt'];
     $currency = $_GET['cc'];
@@ -128,11 +128,10 @@ function report(){
               . "VALUES('{$id}', {$last_id}, '{$row['product_title']}', '{$row['product_price']}', '{$value}')");
             confirm($insert_report);
           }
-          
-        }  
+          unset($_SESSION[$name]);
+        } 
       } 
     }
-    session_destroy();
   } else {
     redirect("index.php");
   }
