@@ -2,7 +2,7 @@
 <?php include TEMPLATE_FRONT . DS . 'header.php';?>
 <?php 
   
-  reports();
+  report();
 ?>
   <!-- Page Content -->
   <div class="container">
