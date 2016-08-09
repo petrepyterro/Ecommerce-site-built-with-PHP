@@ -66,7 +66,7 @@
     <div class="form-group">
       <label for="product_category_id">Product Category</label>
       <select name="product_category_id" id="" class="form-control">
-        <option value="">Select Categories</option>
+        <option value=""><?php echo empty($product_category_id) ? "Select Category" : show_product_category_title($product_category_id);?></option>
         <?php show_categories_add_product(); ?>
       </select>
     </div>
