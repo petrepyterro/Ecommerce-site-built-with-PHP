@@ -1,5 +1,5 @@
 <?php
-
+$uploads_directory = "uploads";
 //helper functions
 
 function redirect($location){
@@ -53,14 +53,14 @@ function get_products(){
   confirm($query);
   
   while($row = fetch_array($query)){
+    $product_image = display_image($row['product_image']);
     $products = <<<EOD
     <div class="col-sm-4 col-lg-4 col-md-4">
       <div class="thumbnail">
-        <a href="item.php?id={$row['id']}"><img src="{$row['product_image']}" alt=""></a>
+        <a href="item.php?id={$row['id']}"><img src="../resources/{$product_image}" alt=""></a>
         <div class="caption">
           <h4 class="pull-right">&#36;{$row['product_price']}</h4>
-          <h4><a href="item.php?id={$row['id']}">{$row['product_title']}</a>
-          </h4>
+          <h4><a href="item.php?id={$row['id']}">{$row['product_title']}</a></h4>
           <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
           <a class="btn btn-primary" target="_blank" href="../resources/cart.php?add={$row['id']}">Add to cart</a>
         </div>
@@ -207,17 +207,23 @@ ORDERS;
 }
 
 /*************************************ADMIN PRODUCTS PAGE*********************************/
+function display_image($picture){
+  global $uploads_directory;
+  return $uploads_directory . DS . $picture;
+}
+
 function get_products_in_admin(){
   $query = query("SELECT * FROM products");
   confirm($query);
   
   while($row = fetch_array($query)){
     $cat_title = !empty($row['product_category_id']) ? show_product_category_title($row['product_category_id']) : "";
+    $product_image = display_image($row['product_image']);
     $products = <<<PRODUCTS
       <tr>
         <td>{$row['id']}</td>
         <td>{$row['product_title']}<br>
-          <a href="index.php?edit_product&id={$row['id']}"><img src="{$row['product_image']}" alt=""></a>
+          <a href="index.php?edit_product&id={$row['id']}"><img width='100' src="../../resources/{$product_image}" alt=""></a>
         </td>
         <td>{$cat_title}</td>
         <td>{$row['product_price']}</td>
