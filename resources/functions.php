@@ -206,25 +206,35 @@ ORDERS;
   }
 }
 
-/*************************************ADMIN PRODUCTS*********************************/
+/*************************************ADMIN PRODUCTS PAGE*********************************/
 function get_products_in_admin(){
   $query = query("SELECT * FROM products");
   confirm($query);
   
   while($row = fetch_array($query)){
+    $cat_title = !empty($row['product_category_id']) ? show_product_category_title($row['product_category_id']) : "";
     $products = <<<PRODUCTS
       <tr>
         <td>{$row['id']}</td>
         <td>{$row['product_title']}<br>
           <a href="index.php?edit_product&id={$row['id']}"><img src="{$row['product_image']}" alt=""></a>
         </td>
-        <td>{$row['product_category_id']}</td>
+        <td>{$cat_title}</td>
         <td>{$row['product_price']}</td>
         <td>{$row['product_quantity']}</td>
         <td><a class="btn btn-danger" href="../../resources/templates/back/delete_product.php?id={$row['id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
       </tr>    
 PRODUCTS;
     echo $products;    
+  }
+}
+
+function show_product_category_title($product_category_id){
+  $query = query("SELECT cat_title FROM categories WHERE id={$product_category_id}");
+  confirm($query);
+  
+  while($row =  fetch_array($query)){
+    return $row['cat_title'];
   }
 }
 
