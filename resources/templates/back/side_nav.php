@@ -19,5 +19,11 @@
     <li>
         <a href="index.php?users"><i class="fa fa-fw fa-wrench"></i>Users</a>
     </li>
+    <li>
+        <a href="index.php?add_user"><i class="fa fa-fw fa-wrench"></i>Add user</a>
+    </li>
+    <li>
+        <a href="index.php?edit_user"><i class="fa fa-fw fa-wrench"></i>Edit user</a>
+    </li>
   </ul>
 </div>

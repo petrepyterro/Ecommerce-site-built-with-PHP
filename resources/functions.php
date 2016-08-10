@@ -379,15 +379,77 @@ function show_users_in_admin(){
     $user_id = $row['id'];
     $username = $row['username'];
     $user_email = $row['user_email'];
+    $user_photo = display_image($row['user_photo']);
     
     $users = <<<USERS
       <tr>
         <td>{$user_id}</td>
-        <td>{$username}</td>
+        <td>
+          {$username}<br>
+          <a href="index.php?edit_user&id={$row['id']}"><img width='100' src="../../resources/{$user_photo}" alt=""></a>
+        </td>
         <td>{$user_email}</td>
-        <td><a class="btn btn-danger" href="../../resources/templates/back/delete_user.php?id={$row['id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+        <td>
+          <a class="btn btn-danger" href="../../resources/templates/back/delete_user.php?id={$row['id']}"><span class="glyphicon glyphicon-remove"></span></a>
+          <a class="btn btn-success" href="index.php?edit_user&id={$row['id']}">Edit</a>
+        </td>
       </tr>        
 USERS;
     echo $users;    
+  }
+}
+
+function add_user(){
+  if(isset($_POST['add_user'])){
+    $username = escape_string($_POST['username']);
+    $user_email = escape_string($_POST['user_email']);
+    $user_password = escape_string(($_POST['user_password']));
+    $user_photo = escape_string($_FILES['file']['name']);
+    $photo_temp = escape_string($_FILES['file']['tmp_name']);
+    if(!empty(trim($username))){
+      if(empty($user_photo)){
+        $query = query("INSERT INTO users(username, user_email, user_password) VALUES('{$username}', '{$user_email}', '{$user_password}')");
+        confirm($query);
+      } else {
+        move_uploaded_file($photo_temp, UPLOAD_DIRECTORY . DS . $user_photo);
+        
+        $query = query("INSERT INTO users(username, user_email, user_password, user_photo) VALUES('{$username}', '{$user_email}', '{$user_password}', '{$user_photo}')");
+        confirm($query);
+      }
+      set_message("User Created");
+      redirect("index.php?users");
+    } else {
+      echo "<p class='bg-danger'>Username cannot be empty</p>";
+    }
+  }
+}
+
+function update_user(){
+  if(isset($_POST['update_user'])){
+    $user_photo          = escape_string($_FILES['file']['name']);
+    $photo_temp          = escape_string($_FILES['file']['tmp_name']);
+    $setArray = array();
+    unset($_POST['update_user']);
+    foreach($_POST as $key=>$value){
+      if(!empty(trim($value))){
+        $setArray[$key] = $key . "='" . escape_string($value) . "'";
+      }
+    }
+    
+    if (empty($user_photo)){
+      if(!empty($setArray)){
+        $setString = "SET " . join(", ", $setArray);
+        $query = query("UPDATE users {$setString} WHERE id=" . escape_string($_GET['id']));
+        confirm($query);
+        redirect("index.php?users");
+      }    
+    } else {  
+      move_uploaded_file($photo_temp, UPLOAD_DIRECTORY . DS . $user_photo);
+      $setArray['user_photo'] = "user_photo='" . $user_photo . "'";
+      $setString = "SET " . join(", ", $setArray);
+      $query = query("UPDATE users {$setString} WHERE id=" . escape_string($_GET['id']));
+      confirm($query);
+      redirect("index.php?users");
+    }
   }
 }
