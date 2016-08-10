@@ -27,7 +27,7 @@
         }
         
         if(isset($_GET['categories'])){
-          include TEMPLATE_BACK . DS . 'orders.php';
+          include TEMPLATE_BACK . DS . 'categories.php';
         }
         
         if(isset($_GET['users'])){

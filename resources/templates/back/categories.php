@@ -31,10 +31,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>20</td>
-        <td>Example Title</td>
-      </tr>
+      <?php show_categories_in_admin(); ?>
     </tbody>
 
   </table>

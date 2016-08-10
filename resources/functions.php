@@ -334,3 +334,23 @@ function update_product(){
     
   }
 }
+/*************************CATEGORIES IN ADMIN**************************/
+
+function show_categories_in_admin(){
+  $query = query("SELECT * FROM categories");
+  confirm($query);
+  
+  while($row = fetch_array($query)){
+    $cat_id = $row['id'];
+    $cat_title = $row['cat_title'];
+    
+    $categories = <<<CATEGORIES
+      <tr>
+        <td>{$cat_id}</td>
+        <td>{$cat_title}</td>
+      </tr>        
+CATEGORIES;
+    echo $categories;    
+  }
+  
+}
