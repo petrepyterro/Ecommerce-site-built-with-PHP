@@ -1,17 +1,17 @@
 <h1 class="page-header">Product Categories</h1>
-
+<h4 class="bg-success"><?php display_message(); ?></h4>
 
 <div class="col-md-4">
-    
+  <?php add_category_in_admin(); ?>  
   <form action="" method="post">
     
     <div class="form-group">
-      <label for="category-title">Title</label>
-      <input type="text" class="form-control">
+      <label for="cat_title">Title</label>
+      <input type="text" name="cat_title" class="form-control">
     </div>
 
     <div class="form-group">
-      <input type="submit" class="btn btn-primary" value="Add Category">
+      <input type="submit" name="add_category" class="btn btn-primary" value="Add Category">
     </div>      
 
 

@@ -348,9 +348,24 @@ function show_categories_in_admin(){
       <tr>
         <td>{$cat_id}</td>
         <td>{$cat_title}</td>
+        <td><a class="btn btn-danger" href="../../resources/templates/back/delete_category.php?id={$row['id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
       </tr>        
 CATEGORIES;
     echo $categories;    
   }
   
+}
+
+function add_category_in_admin(){
+  if(isset($_POST['add_category'])){
+    $cat_title = escape_string($_POST['cat_title']);
+    if(!empty(trim($cat_title))){
+      $query = query("INSERT INTO categories(cat_title) VALUES('{$cat_title}')");
+      confirm($query);
+      set_message("Category Created");
+      redirect("index.php?categories");
+    } else {
+      echo "<p class='bg-danger'>THIS CANNOT BE EMPTY</p>";
+    }
+  }
 }
