@@ -369,3 +369,25 @@ function add_category_in_admin(){
     }
   }
 }
+
+/*************************ADMIN USERS**************************/
+function show_users_in_admin(){
+  $query = query("SELECT * FROM users");
+  confirm($query);
+  
+  while($row = fetch_array($query)){
+    $user_id = $row['id'];
+    $username = $row['username'];
+    $user_email = $row['user_email'];
+    
+    $users = <<<USERS
+      <tr>
+        <td>{$user_id}</td>
+        <td>{$username}</td>
+        <td>{$user_email}</td>
+        <td><a class="btn btn-danger" href="../../resources/templates/back/delete_user.php?id={$row['id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+      </tr>        
+USERS;
+    echo $users;    
+  }
+}
