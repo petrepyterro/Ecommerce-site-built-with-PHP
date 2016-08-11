@@ -249,7 +249,7 @@ function show_product_category_title($product_category_id){
 function add_product(){
   if(isset($_POST['publish'])){
     $product_title          = escape_string($_POST['product_title']);
-    $product_category_id    = !empty($row['product_category_id']) ? escape_string($row['product_category_id']) : NULL;
+    $product_category_id    = !empty($_POST['product_category_id']) ? escape_string($_POST['product_category_id']) : NULL;
     $product_description    = escape_string($_POST['product_description']);
     $product_short_desc     = escape_string($_POST['product_short_desc']);
     $product_price          = escape_string($_POST['product_price']);
@@ -259,7 +259,7 @@ function add_product(){
     
     move_uploaded_file($image_temp_location, UPLOAD_DIRECTORY . DS . $product_image);
     if($product_category_id){
-      $query = query("INSERT INTO products(product_title, product_category_id, product_description, product_short_desc, product_price, product_quantity, product_image) VALUES('{$product_title}', {$product_category_id}, '{$product_description}', '{$product_short_desc}', '{$product_price}', '{$product_quantity}', '{$product_image}')");
+      $query = query("INSERT INTO products(product_title, product_category_id, product_description, product_short_desc, product_price, product_quantity, product_image) VALUES('{$product_title}', '{$product_category_id}', '{$product_description}', '{$product_short_desc}', '{$product_price}', '{$product_quantity}', '{$product_image}')");
     } else {
       $query = query("INSERT INTO products(product_title, product_description, product_short_desc, product_price, product_quantity, product_image) VALUES('{$product_title}', '{$product_description}', '{$product_short_desc}', '{$product_price}', '{$product_quantity}', '{$product_image}')");
     }
@@ -452,4 +452,40 @@ function update_user(){
       redirect("index.php?users");
     }
   }
+}
+
+function get_reports_in_admin(){
+  $query = query("SELECT * FROM reports");
+  confirm($query);
+  
+  while($row = fetch_array($query)){
+    $id = $row['id'];
+    $product_id = $row['product_id'];
+    $order_id = $row['order_id'];
+    $price = $row['product_price'];
+    $product_title = $row['product_title'];
+    $product_quantity = $row['product_quantity'];
+    
+    $image_query = query("SELECT product_image FROM products WHERE id={$product_id}");
+    confirm($image_query);
+    
+    while($product = fetch_array($image_query)){
+      $product_image = display_image($product['product_image']);
+    }
+    $reports = <<<PRODUCTS
+      <tr>
+        <td>{$id}</td>
+        <td>{$product_id}</td>
+        <td>{$order_id}</td>
+        <td>{$price}</td>
+        <td>
+          {$product_title}<br>
+          <img width='100' src="../../resources/{$product_image}" alt="">
+        </td>
+        <td>{$product_quantity}</td>  
+      </tr>    
+PRODUCTS;
+    echo $reports; 
+  } 
+  
 }

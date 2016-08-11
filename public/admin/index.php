@@ -41,6 +41,10 @@
         if(isset($_GET['edit_user'])){
           include TEMPLATE_BACK . DS . 'edit_user.php';
         }
+        
+        if(isset($_GET['reports'])){
+          include TEMPLATE_BACK . DS . 'reports.php';
+        }
       ?>
 
     </div>

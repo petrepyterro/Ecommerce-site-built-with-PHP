@@ -25,5 +25,8 @@
     <li>
         <a href="index.php?edit_user"><i class="fa fa-fw fa-wrench"></i>Edit user</a>
     </li>
+    <li>
+        <a href="index.php?reports"><i class="fa fa-fw fa-wrench"></i>Reports</a>
+    </li>
   </ul>
 </div>
