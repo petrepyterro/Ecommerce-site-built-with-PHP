@@ -358,8 +358,8 @@ CATEGORIES;
 
 function add_category_in_admin(){
   if(isset($_POST['add_category'])){
-    $cat_title = escape_string($_POST['cat_title']);
-    if(!empty(trim($cat_title))){
+    $cat_title = trim(escape_string($_POST['cat_title']));
+    if(!empty($cat_title)){
       $query = query("INSERT INTO categories(cat_title) VALUES('{$cat_title}')");
       confirm($query);
       set_message("Category Created");
@@ -401,12 +401,12 @@ USERS;
 
 function add_user(){
   if(isset($_POST['add_user'])){
-    $username = escape_string($_POST['username']);
+    $username = trim(escape_string($_POST['username']));
     $user_email = escape_string($_POST['user_email']);
     $user_password = escape_string(($_POST['user_password']));
     $user_photo = escape_string($_FILES['file']['name']);
     $photo_temp = escape_string($_FILES['file']['tmp_name']);
-    if(!empty(trim($username))){
+    if(!empty($username)){
       if(empty($user_photo)){
         $query = query("INSERT INTO users(username, user_email, user_password) VALUES('{$username}', '{$user_email}', '{$user_password}')");
         confirm($query);
@@ -431,7 +431,8 @@ function update_user(){
     $setArray = array();
     unset($_POST['update_user']);
     foreach($_POST as $key=>$value){
-      if(!empty(trim($value))){
+      $trimmedValue = trim($value);
+      if(!empty($trimmedValue)){
         $setArray[$key] = $key . "='" . escape_string($value) . "'";
       }
     }
