@@ -6,7 +6,7 @@
     <div class="container-fluid">
 
       <?php 
-        if($_SERVER['REQUEST_URI'] == '/public/admin/' || $_SERVER['REQUEST_URI'] == '/public/admin/index.php'){
+        if($_SERVER['REQUEST_URI'] == '/admin/' || $_SERVER['REQUEST_URI'] == '/admin/index.php'){
           include TEMPLATE_BACK . DS . 'admin_content.php';
         };
         
