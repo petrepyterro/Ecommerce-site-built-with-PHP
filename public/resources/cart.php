@@ -1,4 +1,4 @@
-<?php require_once 'config.php';?>
+<?php require_once '../../resources/config.php';?>
 <?php
   if(isset($_GET['add'])){
     
@@ -9,10 +9,10 @@
     while($row = fetch_array($query)){
       if($row['product_quantity'] != $_SESSION['product_' . $_GET['add']]){
         $_SESSION['product_' . $_GET['add']] += 1;
-        redirect("../public/checkout.php");
+        redirect("../checkout.php");
       } else {
         set_message("We only have {$row['product_quantity']} {$row['product_title']} available");
-        redirect("../public/checkout.php");
+        redirect("../checkout.php");
       }
     }
     
@@ -26,9 +26,9 @@
       $_SESSION['product_' . $_GET['remove']] = '0';
       $_SESSION['item_total'] = 0;
       $_SESSION['item_quantity'] = 0;
-      redirect("checkout.php");
+      redirect("../checkout.php");
     } else {
-      redirect("../public/checkout.php");
+      redirect("../checkout.php");
     }
   }
   
@@ -36,7 +36,7 @@
     $_SESSION['product_' . $_GET['delete']] = '0';
     $_SESSION['item_total'] = 0;
     $_SESSION['item_quantity'] = 0;
-    redirect("../public/checkout.php");
+    redirect("../checkout.php");
   }
   
 function cart(){
