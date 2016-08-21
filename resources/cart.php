@@ -136,6 +136,8 @@ function process_transaction(){
         } 
       } 
     }
+    unset($_SESSION['item_total']);
+    unset($_SESSION['item_quantity']);
   } else {
     redirect("index.php");
   }
