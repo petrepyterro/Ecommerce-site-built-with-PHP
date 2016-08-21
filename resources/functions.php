@@ -49,7 +49,7 @@ function display_message(){
 
 //get products
 function get_products(){
-  $query = query("SELECT * FROM products");
+  $query = query("SELECT * FROM products WHERE product_quantity >= 1");
   confirm($query);
   
   while($row = fetch_array($query)){
@@ -84,7 +84,7 @@ DELIMETER;
 }
 
 function get_products_by_category(){
-  $query = query("SELECT * FROM products WHERE product_category_id=" . escape_string($_GET['id']));
+  $query = query("SELECT * FROM products WHERE product_category_id=" . escape_string($_GET['id']) . " AND product_quantity >= 1");
   confirm($query);
   
   while($row = fetch_array($query)){
@@ -108,7 +108,7 @@ EOD;
 }
 
 function get_products_in_shop_page(){
-  $query = query("SELECT * FROM products ");
+  $query = query("SELECT * FROM products WHERE product_quantity >= 1");
   confirm($query);
   
   while($row = fetch_array($query)){
