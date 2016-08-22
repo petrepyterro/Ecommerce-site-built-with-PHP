@@ -200,7 +200,7 @@ function display_orders(){
         <td>{$row['order_transaction']}</td>
         <td>{$row['order_currency']}</td>
         <td>{$row['order_status']}</td>
-        <td><a class="btn btn-danger" href="../../resources/templates/back/delete_order.php?id={$row['id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+        <td><a class="btn btn-danger" href="index.php?delete_order_id={$row['id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
       </tr>        
 ORDERS;
     echo $orders;    
@@ -229,7 +229,7 @@ function get_products_in_admin(){
         <td>{$cat_title}</td>
         <td>{$row['product_price']}</td>
         <td>{$row['product_quantity']}</td>
-        <td><a class="btn btn-danger" href="../../resources/templates/back/delete_product.php?id={$row['id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+        <td><a class="btn btn-danger" href="index.php?delete_product_id={$row['id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
       </tr>    
 PRODUCTS;
     echo $products;    
@@ -348,7 +348,7 @@ function show_categories_in_admin(){
       <tr>
         <td>{$cat_id}</td>
         <td>{$cat_title}</td>
-        <td><a class="btn btn-danger" href="../../resources/templates/back/delete_category.php?id={$row['id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+        <td><a class="btn btn-danger" href="index.php?delete_category_id={$row['id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
       </tr>        
 CATEGORIES;
     echo $categories;    
@@ -390,7 +390,7 @@ function show_users_in_admin(){
         </td>
         <td>{$user_email}</td>
         <td>
-          <a class="btn btn-danger" href="../../resources/templates/back/delete_user.php?id={$row['id']}"><span class="glyphicon glyphicon-remove"></span></a>
+          <a class="btn btn-danger" href="index.php?delete_user_id={$row['id']}"><span class="glyphicon glyphicon-remove"></span></a>
           <a class="btn btn-success" href="index.php?edit_user&id={$row['id']}">Edit</a>
         </td>
       </tr>        

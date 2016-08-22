@@ -45,6 +45,22 @@
         if(isset($_GET['reports'])){
           include TEMPLATE_BACK . DS . 'reports.php';
         }
+        
+        if(isset($_GET['delete_order_id'])){
+          include TEMPLATE_BACK . DS . 'delete_order.php';
+        }
+        
+        if(isset($_GET['delete_category_id'])){
+          include TEMPLATE_BACK . DS . 'delete_category.php';
+        }
+        
+        if(isset($_GET['delete_product_id'])){
+          include TEMPLATE_BACK . DS . 'delete_product.php';
+        }
+        
+        if(isset($_GET['delete_user_id'])){
+          include TEMPLATE_BACK . DS . 'delete_user.php';
+        }
       ?>
 
     </div>
