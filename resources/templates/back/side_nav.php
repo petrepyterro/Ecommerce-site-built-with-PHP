@@ -28,5 +28,8 @@
     <li>
         <a href="index.php?reports"><i class="fa fa-fw fa-wrench"></i>Reports</a>
     </li>
+    <li>
+        <a href="index.php?slides"><i class="fa fa-fw fa-wrench"></i>Slides</a>
+    </li>
   </ul>
 </div>

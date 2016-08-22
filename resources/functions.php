@@ -489,3 +489,25 @@ PRODUCTS;
   } 
   
 }
+
+
+/*************************** Slides Functions *******************************/
+function add_slides(){
+  
+}
+
+function get_active(){
+  
+}
+
+function get_current_slide(){
+  
+}
+
+function get_slides(){
+  
+}
+
+function get_slide_thumbnails(){
+  
+}
