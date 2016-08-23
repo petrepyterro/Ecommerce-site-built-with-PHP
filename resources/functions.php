@@ -557,5 +557,18 @@ SLIDES;
 }
 
 function get_slide_thumbnails(){
+  $query = query("SELECT * FROM slides ORDER BY id ASC");
+  confirm($query);
   
+  while($row = fetch_array($query)){
+    $slide_image = display_image($row['slide_image']);
+    $slide_thumb_admin = <<<SLIDES
+      <div class="col-xs-6 col-md-3">
+        <a href="">
+          <img class="img-responsive" src="../../resources/{$slide_image}" alt="">
+        </a>
+      </div>       
+SLIDES;
+    echo $slide_thumb_admin;
+  }
 }
