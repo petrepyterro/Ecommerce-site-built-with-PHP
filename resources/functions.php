@@ -527,8 +527,18 @@ SLIDES;
   }
 }
 
-function get_current_slide(){
+function get_current_slide_in_admin(){
+  $query = query("SELECT * FROM slides ORDER BY id DESC LIMIT 1");
+  confirm($query);
   
+  while($row = fetch_array($query)){
+    $slide_image = display_image($row['slide_image']);
+    $slide_active_admin = <<<SLIDES
+      <img class="img-responsive" src="../../resources/{$slide_image}" alt="">
+    </div>        
+SLIDES;
+    echo $slide_active_admin;
+  }
 }
 
 function get_slides(){

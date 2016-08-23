@@ -31,7 +31,7 @@
 
   <div class="col-xs-8">
 
-    <img src="http://placehold.it/800x300" alt="" />
+    <?php get_current_slide_in_admin(); ?>
 
 
   </div>
