@@ -20,7 +20,7 @@
 
       <div class="form-group">
 
-        <input type="submit" name="add_slide">
+        <input class="btn btn-primary" type="submit" name="add_slide">
 
       </div>
 

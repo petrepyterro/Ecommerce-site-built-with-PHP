@@ -567,6 +567,10 @@ function get_slide_thumbnails(){
         <a href="index.php?delete_slide_id={$row['id']}">
           <img class="img-responsive slide_image" src="../../resources/{$slide_image}" alt="">
         </a>
+          
+        <div class="caption">
+          <p>{$row['slide_title']}</p>
+        </div>  
       </div>       
 SLIDES;
     echo $slide_thumb_admin;
