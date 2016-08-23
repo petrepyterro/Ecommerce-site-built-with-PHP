@@ -493,7 +493,23 @@ PRODUCTS;
 
 /*************************** Slides Functions *******************************/
 function add_slides(){
-  
+  if(isset($_POST['add_slide'])){
+    $slide_title = trim(escape_string($_POST['slide_title']));
+    $slide_image = trim(escape_string($_FILES['file']['name']));
+    $slide_image_loc = $_FILES['file']['tmp_name'];
+    
+    if(empty($slide_title) || empty($slide_image)){
+      echo "<p class='bg-danger'>This field cannot be empty</p>";
+    } else {
+      move_uploaded_file($slide_image_loc, UPLOAD_DIRECTORY . DS . $slide_image);
+      
+      $query = query("INSERT INTO slides(slide_title, slide_image) VALUES('$slide_title', '$slide_image')");
+      confirm($query);
+      
+      set_message("Slide added");
+      redirect("index.php?slides");
+    }
+  }
 }
 
 function get_active(){
