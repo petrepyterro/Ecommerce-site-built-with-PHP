@@ -563,7 +563,7 @@ function get_slide_thumbnails(){
   while($row = fetch_array($query)){
     $slide_image = display_image($row['slide_image']);
     $slide_thumb_admin = <<<SLIDES
-      <div class="col-xs-6 col-md-3">
+      <div class="col-xs-6 col-md-3 image_container">
         <a href="index.php?delete_slide_id={$row['id']}">
           <img class="img-responsive slide_image" src="../../resources/{$slide_image}" alt="">
         </a>
